@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Apple TV tvOS 18 Google Photos Album Chooser & Validator Dialog -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="640dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/slideshow_modal_bg"
+    android:padding="28dp">
+
+    <!-- Header -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/leo_album_title"
+        android:textColor="@color/tvos_label_primary"
+        android:textSize="@dimen/tvos_text_title3"
+        android:fontFamily="sans-serif-black"
+        android:letterSpacing="-0.01" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="@string/leo_album_public_hint"
+        android:textColor="#99FFFFFF"
+        android:textSize="13sp"
+        android:fontFamily="sans-serif-medium" />
+
+    <!-- Album URL Input Box -->
+    <TextView
+        style="@style/SettingsFootnote"
+        android:layout_marginTop="18dp"
+        android:text="@string/leo_album_link_label"
+        android:textColor="#88FFFFFF"
+        android:textSize="11sp" />
+
+    <EditText
+        android:id="@+id/editAlbumUrl"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginTop="6dp"
+        android:background="@drawable/settings_choice_bg"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:singleLine="true"
+        android:inputType="textUri"
+        android:imeOptions="actionDone"
+        android:hint="https://photos.app.goo.gl/..."
+        android:textColor="@drawable/pill_text"
+        android:textColorHint="@drawable/pill_text_dim"
+        android:textSize="13sp"
+        android:fontFamily="sans-serif"
+        android:nextFocusDown="@+id/btnPasteUrl" />
+
+    <!-- Utility Action Row (Paste / Clear) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/btnPasteUrl"
+            style="@style/SettingsRow"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/leo_paste_clipboard"
+            android:textSize="12sp"
+            android:nextFocusUp="@+id/editAlbumUrl"
+            android:nextFocusRight="@+id/btnClearUrl"
+            android:nextFocusDown="@+id/btnSaveAlbum" />
+
+        <View
+            android:layout_width="10dp"
+            android:layout_height="1dp" />
+
+        <TextView
+            android:id="@+id/btnClearUrl"
+            style="@style/SettingsRow"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/leo_clear_link"
+            android:textSize="12sp"
+            android:nextFocusUp="@+id/editAlbumUrl"
+            android:nextFocusLeft="@+id/btnPasteUrl"
+            android:nextFocusDown="@+id/btnSaveAlbum" />
+    </LinearLayout>
+
+    <!-- Status & Error Box -->
+    <LinearLayout
+        android:id="@+id/statusContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="4dp">
+
+        <ProgressBar
+            android:id="@+id/albumProgressBar"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_marginEnd="10dp"
+            android:indeterminate="true"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/albumStatusMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/leo_album_validation_hint"
+            android:textColor="#88FFFFFF"
+            android:textSize="12sp"
+            android:lineSpacingExtra="2dp"
+            android:fontFamily="sans-serif-medium" />
+    </LinearLayout>
+
+    <!-- Main Action Buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/btnSaveAlbum"
+            style="@style/SettingsRow"
+            android:gravity="center"
+            android:text="@string/leo_validate_save"
+            android:fontFamily="sans-serif-black"
+            android:nextFocusUp="@+id/btnPasteUrl"
+            android:nextFocusDown="@+id/btnSyncNow" />
+
+        <TextView
+            android:id="@+id/btnSyncNow"
+            style="@style/SettingsRow"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="@string/leo_reload_album"
+            android:textSize="13sp"
+            android:nextFocusUp="@+id/btnSaveAlbum"
+            android:nextFocusDown="@+id/btnCloseAlbum" />
+
+        <TextView
+            android:id="@+id/btnCloseAlbum"
+            style="@style/SettingsRow"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="@string/leo_close"
+            android:textSize="13sp"
+            android:nextFocusUp="@+id/btnSyncNow" />
+    </LinearLayout>
+
+</LinearLayout>

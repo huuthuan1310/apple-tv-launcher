@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- tvOS focus for full-width list rows: NO horizontal or vertical scaling to keep text perfectly static -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_focused="true">
+        <set>
+            <objectAnimator
+                android:propertyName="translationZ"
+                android:valueTo="4dp"
+                android:duration="180"
+                android:interpolator="@interpolator/tvos_ease"
+                android:valueType="floatType" />
+        </set>
+    </item>
+    <item>
+        <set>
+            <objectAnimator
+                android:propertyName="translationZ"
+                android:valueTo="0dp"
+                android:duration="140"
+                android:interpolator="@interpolator/tvos_ease"
+                android:valueType="floatType" />
+        </set>
+    </item>
+</selector>

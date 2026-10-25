@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Apple TV tvOS 18 App Quick Action Dialog (Long Press Menu) -->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/slideshow_modal_bg"
+    android:clipToOutline="true" android:scrollbars="none" android:overScrollMode="never">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="vertical" android:padding="20dp">
+
+    <!-- Header: App Icon + Name + Pkg -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:id="@+id/actionAppIcon"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:scaleType="fitCenter" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="16dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/actionAppName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:fontFamily="sans-serif-black"
+                android:singleLine="true"
+                android:ellipsize="end" />
+
+            <TextView
+                android:id="@+id/actionAppStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:textColor="#99FFFFFF"
+                android:textSize="12sp"
+                android:fontFamily="sans-serif-medium"
+                android:singleLine="true"
+                android:ellipsize="end" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:background="#20FFFFFF" />
+
+    <!-- Actions -->
+    <TextView
+        android:id="@+id/btnMove"
+        style="@style/AppActionRow"
+        android:text="@string/leo_move" />
+
+    <TextView
+        android:id="@+id/btnToggleDock"
+        style="@style/AppActionRow"
+        android:layout_marginTop="8dp"
+        android:text="@string/leo_pin_dock" />
+
+    <TextView
+        android:id="@+id/btnAppDetails"
+        style="@style/AppActionRow"
+        android:layout_marginTop="8dp"
+        android:text="@string/leo_app_info" />
+
+    <TextView
+        android:id="@+id/btnUninstall"
+        style="@style/AppActionRow"
+        android:layout_marginTop="8dp"
+        android:text="@string/leo_uninstall_app" />
+
+    <TextView
+        android:id="@+id/btnDismiss"
+        style="@style/AppActionRow"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+        android:text="@string/leo_close" />
+
+</LinearLayout>
+</ScrollView>

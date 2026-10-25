@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Apple TV tvOS 18 Slideshow Transition Chooser & Live Preview -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="740dp"
+    android:layout_height="440dp"
+    android:orientation="vertical"
+    android:background="@drawable/slideshow_modal_bg"
+    android:padding="22dp">
+
+    <!-- Header -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/leo_slideshow_title"
+        android:textColor="@color/tvos_label_primary"
+        android:textSize="@dimen/tvos_text_title3"
+        android:fontFamily="sans-serif-black"
+        android:letterSpacing="-0.01" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="@string/leo_slideshow_preview_hint"
+        android:textColor="#99FFFFFF"
+        android:textSize="13sp"
+        android:fontFamily="sans-serif-medium" />
+
+    <!-- Split View: Left (Live Preview Player) | Right (Transition Options) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <!-- Left: 16:9 Live Preview Screen -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.15"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <!-- 16:9 Screen Container -->
+            <FrameLayout
+                android:id="@+id/previewContainer"
+                android:layout_width="match_parent"
+                android:layout_height="190dp"
+                android:background="@drawable/preview_screen_bg"
+                android:clipChildren="true"
+                android:clipToPadding="true">
+
+                <ImageView
+                    android:id="@+id/previewA"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:importantForAccessibility="no" />
+
+                <ImageView
+                    android:id="@+id/previewB"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:alpha="0"
+                    android:importantForAccessibility="no" />
+
+                <!-- Subtle TV Border Frame -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/glass_panel"
+                    android:alpha="0.25" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/previewDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:gravity="center"
+                android:text="@string/leo_transition_fade_desc"
+                android:textColor="#B3FFFFFF"
+                android:textSize="12sp"
+                android:fontFamily="sans-serif-medium" />
+
+            <TextView
+                android:id="@+id/btnReplay"
+                style="@style/SettingsRow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:text="@string/leo_preview_again"
+                android:textSize="12sp"
+                android:nextFocusRight="@+id/optFade" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:background="#20FFFFFF" />
+
+        <!-- Right: Options List -->
+        <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:scrollbars="none"
+            android:overScrollMode="never">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/optFade"
+                    style="@style/SettingsRow"
+                    android:text="@string/leo_transition_fade_selected"
+                    android:nextFocusLeft="@+id/btnReplay"
+                    android:nextFocusDown="@+id/optKenBurns" />
+
+                <TextView
+                    android:id="@+id/optKenBurns"
+                    style="@style/SettingsRow"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/leo_transition_ken_default"
+                    android:nextFocusLeft="@+id/btnReplay"
+                    android:nextFocusUp="@+id/optFade"
+                    android:nextFocusDown="@+id/optSlide" />
+
+                <TextView
+                    android:id="@+id/optSlide"
+                    style="@style/SettingsRow"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/leo_transition_slide_default"
+                    android:nextFocusLeft="@+id/btnReplay"
+                    android:nextFocusUp="@+id/optKenBurns"
+                    android:nextFocusDown="@+id/optZoomFade" />
+
+                <TextView
+                    android:id="@+id/optZoomFade"
+                    style="@style/SettingsRow"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/leo_transition_zoom_default"
+                    android:nextFocusLeft="@+id/btnReplay"
+                    android:nextFocusUp="@+id/optSlide" />
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Apple TV (tvOS 18) Settings: Left Hero Brand Card, Right Split-List Menu with Aligned Header -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:background="@drawable/settings_backdrop">
+
+    <!-- Keep the hero compact; detailed device information opens separately. -->
+    <ScrollView
+        android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1"
+        android:fillViewport="true" android:scrollbars="none" android:overScrollMode="never">
+        <LinearLayout
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical" android:gravity="center"
+            android:paddingStart="28dp" android:paddingEnd="28dp"
+            android:paddingTop="24dp" android:paddingBottom="24dp">
+            <com.leotv.launcher.AppleTvBrandView
+                android:layout_width="200dp" android:layout_height="200dp"
+                android:importantForAccessibility="no" />
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="18dp" android:gravity="center"
+                android:lineSpacingExtra="3dp" android:textSize="13sp" android:textColor="#E6FFFFFF"
+                android:text="@string/leo_credit" />
+            <TextView android:id="@+id/systemInformationChoice"
+                style="@style/AppActionRow"
+                android:layout_width="240dp" android:layout_marginTop="20dp"
+                android:gravity="center" android:text="@string/leo_system_information" />
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Right Column: Header & tvOS Grouped Settings List (Aligned together) -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingStart="24dp"
+        android:paddingEnd="38dp"
+        android:paddingTop="32dp">
+
+        <!-- Top Title: Aligned with the right-hand settings items -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="@string/launcher_settings"
+            android:textColor="@color/tvos_label_primary"
+            android:textSize="@dimen/tvos_text_title3"
+            android:fontFamily="sans-serif-black"
+            android:letterSpacing="-0.01" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:clipToPadding="false"
+            android:scrollbars="none"
+            android:overScrollMode="never"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="8dp"
+                android:paddingBottom="42dp"
+                android:clipChildren="false">
+
+                <!-- GROUP 1: APPEARANCE & MOTION -->
+                <TextView
+                    style="@style/SettingsGroupLabel"
+                    android:text="@string/columns_label" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal"
+                    android:clipChildren="false">
+
+                    <TextView android:id="@+id/columns4" style="@style/SettingsColumnChoice" android:text="3" />
+                    <TextView android:id="@+id/columns5" style="@style/SettingsColumnChoice" android:text="4" />
+                    <TextView android:id="@+id/columns6" style="@style/SettingsColumnChoice" android:text="5" />
+                    <TextView android:id="@+id/columns7" style="@style/SettingsColumnChoice" android:text="6" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/animationsChoice"
+                    style="@style/SettingsRow"
+                    android:layout_marginTop="16dp" />
+
+                <TextView
+                    android:id="@+id/wallpaperChoice"
+                    style="@style/SettingsRow"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/leo_wallpaper_album" />
+
+                <TextView
+                    style="@style/SettingsFootnote"
+                    android:layout_marginTop="6dp"
+                    android:text="@string/leo_wallpaper_help" />
+
+                <TextView
+                    android:id="@+id/appBackdropsChoice"
+                    style="@style/SettingsRow"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/leo_backdrops_default" />
+
+                <TextView
+                    style="@style/SettingsFootnote"
+                    android:layout_marginTop="6dp"
+                    android:text="@string/leo_backdrops_help" />
+
+                <TextView
+                    android:id="@+id/slideshowTransitionChoice"
+                    style="@style/SettingsRow"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/leo_slideshow_default" />
+
+                <TextView
+                    style="@style/SettingsFootnote"
+                    android:layout_marginTop="6dp"
+                    android:text="@string/leo_slideshow_help" />
+
+                <TextView
+                    android:id="@+id/slideshowIntervalChoice"
+                    style="@style/SettingsRow"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/leo_interval_default" />
+
+                <TextView
+                    style="@style/SettingsFootnote"
+                    android:layout_marginTop="6dp"
+                    android:text="@string/leo_interval_help" />
+
+                <TextView
+                    android:id="@+id/dockAppsChoice"
+                    style="@style/SettingsRow"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/leo_dock_manage" />
+
+                <TextView
+                    style="@style/SettingsFootnote"
+                    android:layout_marginTop="6dp"
+                    android:text="@string/leo_dock_manage_help" />
+
+                <TextView
+                    android:id="@+id/followThemeChoice"
+                    style="@style/SettingsRow"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/follow_theme" />
+
+                <TextView
+                    style="@style/SettingsFootnote"
+                    android:layout_marginTop="6dp"
+                    android:text="@string/follow_theme_hint" />
+
+                <!-- GROUP 2: SYSTEM & HARDWARE -->
+                <TextView
+                    style="@style/SettingsGroupLabel"
+                    android:layout_marginTop="24dp"
+                    android:text="@string/settings_system_group" />
+
+                <TextView
+                    android:id="@+id/tvSettingsChoice"
+                    style="@style/SettingsRow"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/tv_settings" />
+
+                <TextView
+                    style="@style/SettingsFootnote"
+                    android:layout_marginTop="6dp"
+                    android:text="@string/leo_system_settings_help" />
+
+                <TextView
+                    android:id="@+id/donateChoice"
+                    style="@style/SettingsRow"
+                    android:layout_marginTop="24dp"
+                    android:text="@string/leo_donate" />
+
+                <TextView
+                    style="@style/SettingsFootnote"
+                    android:layout_marginTop="6dp"
+                    android:text="paypal.me/leonguyens" />
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:orientation="vertical" android:padding="24dp"
+    android:background="@drawable/slideshow_modal_bg">
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:text="@string/leo_system_information" android:textSize="22sp" android:textColor="#FFFFFFFF"
+        android:layout_marginBottom="16dp" />
+    <ScrollView android:layout_width="match_parent" android:layout_height="220dp"
+        android:fillViewport="true" android:scrollbars="vertical">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView android:id="@+id/systemInformation"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:textSize="14sp" android:textColor="#DDFFFFFF" android:lineSpacingExtra="8dp" />
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="18dp" android:textSize="11sp" android:textColor="#99FFFFFF"
+                android:text="@string/leo_weather_attribution" />
+        </LinearLayout>
+    </ScrollView>
+    <TextView android:id="@+id/closeSystemInformation" style="@style/AppActionRow"
+        android:layout_marginTop="16dp" android:gravity="center" android:text="@string/leo_close" />
+</LinearLayout>

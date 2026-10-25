@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- tvOS 18 Home: full-bleed Top Shelf art, a menu bar platter at the top right (clock + Inputs / Wi-Fi /
+     Settings controls, greeting and date to its left), the Top Shelf title above the dock, and the app grid
+     on the kit's 6-column grid (250x150px icons, 48px gaps, first icon at x 90px). -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/home_backdrop">
+
+    <!-- Base Wallpaper Dual-Layer for Smooth Slideshow Transitions -->
+    <FrameLayout
+        android:id="@+id/wallpaperContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/wallpaperA"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:importantForAccessibility="no" />
+
+        <ImageView
+            android:id="@+id/wallpaperB"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:alpha="0"
+            android:importantForAccessibility="no" />
+    </FrameLayout>
+
+    <!-- Dynamic App Backdrop Layer (Cinematic 1080p backdrops for dock apps) -->
+    <ImageView
+        android:id="@+id/appBackdrop"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:alpha="0"
+        android:importantForAccessibility="no" />
+
+    <!-- Dim / Frosted Scrim Overlay:
+         - Alpha 0.0 when hovering dock apps (crystal clear wallpaper)
+         - Alpha 0.85 when scrolling down into grid (dimmed/frosted background) -->
+    <View
+        android:id="@+id/wallpaperDimOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#D907080A"
+        android:alpha="0"
+        android:importantForAccessibility="no" />
+
+    <!-- Time-of-day backdrop, drawn once a minute (config.xml sky_intensity; 0 keeps it hidden). -->
+    <com.leotv.launcher.SkyView
+        android:id="@+id/sky"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:importantForAccessibility="no" />
+
+    <!-- Ambient glow in the colour of the focused dock app. -->
+    <View
+        android:id="@+id/ambient"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0" />
+
+    <!-- Top Shelf title: the focused dock app's name, positioned above the dock in code.
+         tvOS Title 1 Emphasized (76px bold). -->
+    <TextView
+        android:id="@+id/heroName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:alpha="0"
+        android:textColor="@color/tvos_label_primary"
+        android:textSize="@dimen/tvos_text_title1"
+        android:fontFamily="sans-serif-black"
+        android:letterSpacing="-0.02"
+        android:includeFontPadding="false"
+        android:shadowColor="#73000000"
+        android:shadowDy="1"
+        android:shadowRadius="6"
+        android:singleLine="true" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingTop="25dp">
+
+        <!-- Header row: [Left info cluster: Date · Time · Weather] [Right status platter: Profile / Controls] -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="45dp"
+            android:layout_marginEnd="@dimen/tvos_grid_inset"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <LinearLayout android:id="@+id/leftInfoCluster"
+                android:layout_width="wrap_content" android:layout_height="41dp"
+                android:paddingStart="14dp" android:paddingEnd="14dp"
+                android:background="@drawable/menu_bar_bg" android:orientation="horizontal"
+                android:gravity="start|center_vertical">
+                <LinearLayout android:id="@+id/dateGroup"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:orientation="vertical" android:gravity="center_vertical">
+                    <TextClock android:id="@+id/datePill"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:format12Hour="EEE, dd/MM" android:format24Hour="EEE, dd/MM"
+                        android:textColor="#E6FFFFFF"
+                        android:textSize="11.5sp" android:fontFamily="sans-serif-medium"
+                        android:shadowColor="#80000000" android:shadowDy="1" android:shadowRadius="4"
+                        android:includeFontPadding="false" />
+                </LinearLayout>
+                <TextView android:id="@+id/lunarDate" android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:layout_marginStart="8dp"
+                    android:textSize="11sp" android:textColor="#B3FFFFFF"
+                    android:includeFontPadding="false" android:singleLine="true" />
+                <View android:layout_width="3dp" android:layout_height="3dp"
+                    android:layout_marginStart="8dp" android:layout_marginEnd="8dp"
+                    android:background="@drawable/status_dot" android:backgroundTint="#80FFFFFF" />
+                <TextView android:id="@+id/weatherLabel"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="@string/leo_weather_unavailable" android:textSize="11.5sp" android:textColor="#E6FFFFFF"
+                    android:fontFamily="sans-serif-medium" android:shadowColor="#80000000"
+                    android:shadowDy="1" android:shadowRadius="4" android:includeFontPadding="false"
+                    android:contentDescription="@string/leo_weather" />
+            </LinearLayout>
+
+            <View android:layout_width="0dp" android:layout_height="1dp" android:layout_weight="1" />
+
+            <!-- Hidden legacy elements to preserve backward compatibility with existing code -->
+            <TextView android:id="@+id/greeting" android:layout_width="0dp" android:layout_height="0dp" android:visibility="gone" />
+            <TextView android:id="@+id/shamsiDate" android:layout_width="0dp" android:layout_height="0dp" android:visibility="gone" />
+            <TextClock android:id="@+id/date" android:layout_width="0dp" android:layout_height="0dp" android:visibility="gone" />
+
+            <!-- tvOS 18 Status Bar Platter: In idle state, contains ONLY the user avatar button (btnProfile).
+                 Expands on hover or D-pad focus to reveal controlsGroup (Inputs, Wi-Fi, Settings). -->
+            <LinearLayout
+                android:id="@+id/statusBarPlatter"
+                android:layout_width="wrap_content"
+                android:layout_height="41dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:background="@drawable/menu_bar_bg">
+
+                <LinearLayout android:id="@+id/clockGroup"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:orientation="horizontal" android:gravity="center_vertical"
+                    android:paddingStart="9dp" android:paddingEnd="7dp">
+                    <TextClock android:id="@+id/clock"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:format12Hour="h:mm" android:format24Hour="HH:mm"
+                        android:textColor="#FFFFFFFF" android:textSize="12.5sp" android:fontFamily="sans-serif-medium"
+                        android:shadowColor="#80000000" android:shadowDy="1" android:shadowRadius="4"
+                        android:includeFontPadding="false" />
+                    <TextClock android:id="@+id/ampm"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp" android:format12Hour="a" android:format24Hour=""
+                        android:textColor="#B3FFFFFF" android:textSize="11sp" android:fontFamily="sans-serif-medium"
+                        android:shadowColor="#80000000" android:shadowDy="1" android:shadowRadius="4"
+                        android:includeFontPadding="false" />
+                </LinearLayout>
+
+                <!-- Controls Group: revealed inside the time/profile capsule on hover or focus. -->
+                <LinearLayout
+                    android:id="@+id/controlsGroup"
+                    android:clipChildren="false"
+                    android:clipToPadding="false"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:id="@+id/topButtons"
+                        android:clipChildren="false"
+                        android:clipToPadding="false"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/btnInputs"
+                            style="@style/StatusIcon"
+                            android:text=""
+                            android:contentDescription="@string/inputs"
+                            android:drawableStart="@drawable/ic_input"
+                            android:nextFocusDown="@+id/grid" />
+
+                        <TextView
+                            android:id="@+id/btnWifi"
+                            style="@style/StatusIcon"
+                            android:maxWidth="160dp"
+                            android:singleLine="true"
+                            android:ellipsize="end"
+                            android:text=""
+                            android:contentDescription="@string/wifi"
+                            android:drawableStart="@drawable/ic_wifi"
+                            android:nextFocusDown="@+id/grid" />
+
+                        <TextView
+                            android:id="@+id/btnSettings"
+                            style="@style/StatusIcon"
+                            android:text=""
+                            android:contentDescription="@string/settings"
+                            android:drawableStart="@drawable/ic_control_center"
+                            android:nextFocusDown="@+id/grid" />
+                    </LinearLayout>
+
+                    <!-- Hairline divider between functional buttons and profile avatar -->
+                    <View
+                        android:id="@+id/menuDivider"
+                        android:layout_width="1dp"
+                        android:layout_height="14dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="4dp"
+                        android:background="#26FFFFFF" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/btnProfile"
+                    style="@style/StatusProfile"
+                    android:text=""
+                    android:contentDescription="@string/leo_profile"
+                    android:drawableStart="@drawable/ic_profile"
+                    android:nextFocusDown="@+id/grid" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- The wrapper clips at the grid's edge; the grid itself must not clip so scaled tiles can overflow their cells.
+             33dp side padding = six 149dp cells (125dp icon + 24dp gap), so icons start at x 45dp as in the kit. -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="10dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/grid"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingStart="@dimen/tvos_grid_inset"
+                android:paddingEnd="@dimen/tvos_grid_inset"
+                android:paddingTop="10dp"
+                android:paddingBottom="6dp"
+                android:clipToPadding="false"
+                android:clipChildren="false"
+                android:overScrollMode="never"
+                android:scrollbars="none"
+                android:descendantFocusability="afterDescendants" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <!-- The single floating glass highlight that springs between tiles. -->
+    <com.leotv.launcher.GlassView
+        android:id="@+id/glass"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:alpha="0"
+        android:importantForAccessibility="no" />
+</FrameLayout>
