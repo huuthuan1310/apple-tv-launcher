@@ -63,6 +63,46 @@ keytool -genkeypair -keystore "$HOME/.android/debug.keystore" \
 ./tools/build-apk.sh
 ```
 
+## Debloat / Dọn dẹp box
+
+> [!WARNING]
+> Script debloat **chỉ được test trên Xiaomi Mi Box ROM 5.1.1**. Chưa test trên box khác.
+> Đọc kỹ plan file trước khi approve. Không chạy mù.
+
+Quy trình gồm 3 bước, **không thay đổi TV cho đến khi bạn xem xét và approve**:
+
+### Bước 1 — Audit (chỉ đọc, không đụng TV)
+
+```bash
+./tools/audit.sh <TV_IP>
+```
+
+Tạo ra 3 file trong `reports/`:
+- `report_<ts>.md` — toàn bộ thông tin hardware, ROM, package
+- `plan_<ts>.txt` — danh sách app sẽ bị tắt (chỉnh sửa được)
+- `apply_<ts>.sh` — script thực thi tương ứng plan
+
+### Bước 2 — Xem xét plan
+
+Mở `reports/plan_<ts>.txt`, bỏ dấu `[x]` ở những app bạn **muốn giữ lại**.
+Đối chiếu với profile tương ứng trong `profiles/xiaomi.txt`.
+
+### Bước 3 — Apply (sau khi đã approve)
+
+```bash
+./tools/apply.sh reports/plan_<ts>.txt <TV_IP>
+```
+
+Script tự chụp snapshot trước khi thay đổi. Rollback bất kỳ lúc nào:
+
+```bash
+./tools/restore.sh backups/<snapshot_dir> <TV_IP>
+```
+
+**Các package được bảo vệ tuyệt đối** (không bao giờ bị tắt): xem `tools/protected.txt`.
+
+---
+
 ## Install on a Xiaomi Mi Box (ROM 5.1.1 / Android 5.1)
 
 > These steps apply to Xiaomi Mi Box running stock ROM 5.1.1 (Android 5.1, API 22).
